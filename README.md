@@ -1,6 +1,6 @@
 # System Design Interview Questions – Cheat Sheet
 
-A revision guide for system design interviews: **390+ questions with interview-ready answers**, split into 23 topics. It covers the building blocks (caching, databases, sharding, consistency, messaging), 58 full FAANG-style design walkthroughs, mobile system design, low-level design, scenario-based "what would you do if…" questions, AI/LLM systems, and **company-wise questions** from Google, Meta, Amazon, Netflix, Uber, Stripe, Flipkart, Swiggy, PhonePe, Zerodha, Hotstar and more.
+A revision guide for system design interviews: **400 questions with interview-ready answers**, split into 23 topics. It covers the building blocks (caching, databases, sharding, consistency, messaging), 63 full FAANG-style design walkthroughs, mobile system design, low-level design, scenario-based "what would you do if…" questions, AI/LLM systems, and **company-wise questions** from Google, Meta, Amazon, Netflix, Uber, Stripe, Flipkart, Swiggy, PhonePe, Zerodha, Hotstar and more.
 
 Every answer is hidden in a collapsible block, so you can **test yourself first** and then click to check.
 
@@ -45,7 +45,7 @@ Also see the platform repos: **[Android Interview Questions](https://github.com/
 
 | # | Topic | Questions | Key areas |
 |---|---|---|---|
-| 07 | [Databases: SQL, NoSQL & Indexing](topics/07-databases.md) | 19 | SQL vs NoSQL, ACID, NoSQL families, indexes, B-tree vs LSM, NewSQL, zero-downtime migrations |
+| 07 | [Databases: SQL, NoSQL & Indexing](topics/07-databases.md) | 21 | SQL vs NoSQL, ACID, NoSQL families, indexes, B-tree vs LSM, NewSQL, zero-downtime migrations, MVCC, deadlocks |
 | 08 | [Replication, Partitioning & Sharding](topics/08-replication-sharding.md) | 16 | Leader-follower, multi-leader, quorums, failover, shard keys, hot spots, rebalancing |
 | 09 | [Consistency, Transactions & Consensus](topics/09-consistency-transactions-consensus.md) | 19 | CAP/PACELC, isolation levels, locking, 2PC, sagas, outbox, idempotency, Raft, clocks, CRDTs |
 | 10 | [Storage, Search & Specialised Data Systems](topics/10-storage-search-specialized.md) | 15 | Object storage, erasure coding, inverted indexes, geohash/quadtree/H3, time-series, Bloom filters |
@@ -65,8 +65,8 @@ Also see the platform repos: **[Android Interview Questions](https://github.com/
 | # | Topic | Questions | Key areas |
 |---|---|---|---|
 | 16 | [Designs – Core Infrastructure](topics/16-designs-core-infrastructure.md) | 17 | URL shortener, rate limiter, ID generator, KV store, distributed cache, crawler, notifications, typeahead, scheduler, message queue, monitoring, Pastebin, CDN, logging, auth/SSO, feature flags, CI/CD |
-| 17 | [Designs – Social, Media & Collaboration](topics/17-designs-social-media.md) | 14 | News feed, Twitter, Instagram, WhatsApp, YouTube, live streaming, Dropbox, Google Docs, Reddit, search engine, Spotify, Zoom, Tinder, online presence |
-| 18 | [Designs – Location, Commerce & Fintech](topics/18-designs-location-commerce.md) | 14 | Uber, Yelp, Google Maps, food delivery, Ticketmaster, Amazon, flash sale, payments, wallet, hotel booking, stock exchange, ad clicks, leaderboard, LeetCode |
+| 17 | [Designs – Social, Media & Collaboration](topics/17-designs-social-media.md) | 18 | News feed, Twitter, Instagram, WhatsApp, YouTube, live streaming, Dropbox, Google Docs, Reddit, search engine, Spotify, Zoom, Tinder, online presence, TikTok, Discord/Slack, Figma/Sheets, news aggregator |
+| 18 | [Designs – Location, Commerce & Fintech](topics/18-designs-location-commerce.md) | 15 | Uber, Yelp, Google Maps, food delivery, Ticketmaster, Amazon, flash sale, payments, wallet, hotel booking, stock exchange, ad clicks, leaderboard, LeetCode, coupons |
 | 19 | [Mobile System Design](topics/19-mobile-system-design.md) | 16 | Client architecture, mobile APIs, offline-first sync, real-time, push, caching, background limits, feed/chat/image loader designs |
 
 ### ⭐ Interview Rounds & Trends

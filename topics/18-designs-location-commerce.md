@@ -376,6 +376,24 @@ flowchart TD
 
 </details>
 
+### 15. Design a coupon / promotions system for an e-commerce platform.
+
+<details>
+<summary>Answer</summary>
+
+**Requirements** – create coupons (percentage/flat discount, free delivery, buy-X-get-Y), with eligibility rules (minimum cart value, categories, new users, payment method), validity windows, **global and per-user redemption limits**, stacking rules; validate in milliseconds at checkout; never over-redeem.
+
+**Design**
+- **Coupon service** with a store for definitions and a **rules engine** that evaluates eligibility against the cart and user context (rules cached in memory).
+- **Codes** – public codes (`DIWALI50`) or unique, unguessable per-user codes generated in bulk.
+- **Validation vs redemption** – validation at cart time is read-only; **redemption happens at order placement**: atomically check-and-increment usage counters (conditional DB update or Redis `DECR` on the remaining count, plus a per-user counter), recorded with the order ID.
+- **Consistency with checkout** – redemption is a step in the order **saga**: reserve the coupon when the order is created, confirm on payment success, **release** it on failure or cancellation (with expiry for abandoned reservations). Idempotency keys prevent double redemption on retries.
+- **Hot coupons** – a flash-sale code can create a hot key: shard counters or pre-allocate redemption slots.
+- **Abuse prevention** – device/account limits, velocity checks, fraud signals, audit logs.
+- **Analytics** – redemptions, cost of discounts, conversion uplift for marketing.
+
+</details>
+
 ---
 
 [⬅ Previous: Designs – Social, Media & Collaboration](17-designs-social-media.md) · [⬅ Back to index](../README.md) · [Next: Mobile System Design ➡](19-mobile-system-design.md)

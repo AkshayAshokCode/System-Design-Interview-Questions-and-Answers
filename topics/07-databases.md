@@ -246,6 +246,36 @@ DynamoDB's **single-table design** stores several entity types in one table with
 
 </details>
 
+### 20. What is MVCC (multi-version concurrency control)?
+
+<details>
+<summary>Answer</summary>
+
+Instead of locking rows for reads, the database keeps **multiple versions of each row**. Each transaction reads a consistent **snapshot** – the versions committed before it started (or before each statement, under read committed) – while writers create new versions.
+- **Readers don't block writers and writers don't block readers** – the main benefit for mixed workloads.
+- **Postgres** stores old and new row versions in the table (tracked by transaction IDs) and cleans up dead versions with **VACUUM**; **MySQL InnoDB** keeps old versions in **undo logs**.
+- It's the basis of **snapshot isolation / repeatable read**. Concurrent writes to the *same* row still conflict (one waits or fails), and snapshot isolation alone allows **write skew**, which needs serializable isolation or explicit locks.
+- **Long-running transactions** keep old versions alive, causing table bloat and slower queries – keep transactions short.
+
+</details>
+
+### 21. How do database deadlocks happen, and how do you prevent them?
+
+<details>
+<summary>Answer</summary>
+
+A deadlock occurs when transactions wait for each other's locks in a cycle: T1 locks row A and wants B, while T2 locks B and wants A. Databases detect cycles (a wait-for graph) and **abort one transaction** with a deadlock error.
+
+Prevention and handling:
+- **Lock in a consistent order** (e.g. always update accounts in ascending ID order).
+- **Keep transactions short**; don't hold locks while calling external services.
+- Add **indexes** so updates lock only the rows they need (scans can lock far more, including gap locks in InnoDB).
+- Use **`SELECT … FOR UPDATE`** deliberately; `NOWAIT` or `SKIP LOCKED` for queue-like workloads.
+- Set **lock timeouts**, and **retry** transactions that fail with deadlock or serialization errors (make them idempotent).
+- Prefer optimistic concurrency (version columns) when conflicts are rare.
+
+</details>
+
 ---
 
 [⬅ Previous: Caching](06-caching.md) · [⬅ Back to index](../README.md) · [Next: Replication, Partitioning & Sharding ➡](08-replication-sharding.md)

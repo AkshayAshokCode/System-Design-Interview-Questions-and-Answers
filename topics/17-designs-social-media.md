@@ -433,6 +433,91 @@ flowchart TD
 
 </details>
 
+### 15. Design TikTok (short-video platform with a "For You" feed).
+
+<details>
+<summary>Answer</summary>
+
+**Requirements** – upload short videos; an infinite, personalised feed that starts instantly; likes, comments, shares, follows; hundreds of millions of users; recommendations that adapt within a session.
+
+```mermaid
+flowchart TD
+    UP["Upload"] --> TR["Transcoding pipeline<br/>multiple resolutions, thumbnails,<br/>moderation, embeddings"]
+    TR --> OBJ[("Object storage + CDN")]
+    TR --> IDX[("Video metadata + embedding index")]
+    APP["App: watch events<br/>(watch time, skips, likes)"] --> K["Event stream (Kafka)"]
+    K --> RT["Real-time features<br/>(user interests, video stats)"]
+    FEED["Feed service"] --> CG["Candidate generation<br/>(embeddings, trending, follows,<br/>exploration pool for new videos)"]
+    CG --> RK["Ranking model<br/>(predicted watch time, likes, shares)"]
+    RT --> RK
+    RK --> FEED
+    FEED -->|"batch of ~10 video IDs + URLs"| APP
+    APP -->|"prefetch first seconds"| OBJ
+```
+
+**Deep dives**
+- **Feed is recommendation-driven, not follower-driven** – unlike Twitter's fan-out, the For You feed is generated per request from candidates ranked by models; following is just one signal.
+- **Fast feedback loop** – watch time, rewatches and skips stream in real time, so the next batch reflects what the user just did.
+- **Cold start for new videos** – each new video gets a small exploration audience; strong engagement promotes it to larger pools.
+- **Instant playback** – the client receives a batch of videos ahead of time and **prefetches** the first segments; videos are encoded in several bitrates and served from CDNs close to users.
+- **Counters** (views, likes) aggregated asynchronously; **moderation** runs at upload and continuously.
+- **Storage** – metadata in a sharded DB, media in object storage with hot/cold tiers.
+
+</details>
+
+### 16. Design Discord or Slack (servers/workspaces, channels, huge groups).
+
+<details>
+<summary>Answer</summary>
+
+**Requirements** – workspaces/servers with many channels, real-time messages, threads, reactions, presence, search, permissions per channel; some servers have hundreds of thousands or millions of members.
+
+**Design**
+- **Gateway layer** – clients keep a WebSocket to gateway servers; each session subscribes to the servers/channels it can see.
+- **Messages** – stored per channel, partitioned by **channel ID + time bucket** so huge channels don't create unbounded partitions (Discord's well-known design on Cassandra/ScyllaDB); message IDs are time-sortable (Snowflake).
+- **Fan-out** – a message is published to the channel's subscribers through pub/sub to the gateways holding those sessions. For **very large servers**, send updates only to members actively viewing the channel, load the member list lazily, and rely on unread markers for everyone else.
+- **Read state** – per user per channel "last read message ID" for unread badges and mentions.
+- **Presence** – expensive at scale: broadcast only to visible members, batch updates, and drop presence for offline/inactive users in huge servers.
+- **Permissions** – role-based, per channel, cached at the gateway and checked on every send.
+- **Search** – per-workspace search index fed asynchronously.
+- **Slack specifics** – data partitioned by workspace (and enterprise grids spanning workspaces), strong emphasis on retention policies, compliance exports and integrations (bots, webhooks, apps).
+- **Voice/video** – separate SFU-based media servers.
+
+</details>
+
+### 17. Design a collaborative whiteboard (like Figma or Miro) or a collaborative spreadsheet.
+
+<details>
+<summary>Answer</summary>
+
+**Whiteboard / design tool**
+- The document is a **tree of objects** (shapes, frames, text) with properties.
+- Clients connect via WebSocket to a **document server** that owns the document (one server per document, chosen by consistent hashing).
+- Edits are small property changes (`object 42.x = 120`). A common approach (used by Figma) is **server-ordered, per-property last-writer-wins**: concurrent edits to different properties merge naturally; the same property resolves to the last write the server receives. CRDTs are an alternative, especially for offline-first editing.
+- **Presence** (cursors, selections) is broadcast but never persisted.
+- **Persistence** – periodic snapshots plus an operation log; load only visible regions/pages for huge files; multiplayer undo is per user.
+
+**Spreadsheet (like Google Sheets)**
+- Sparse cell storage (only non-empty cells), chunked by row ranges.
+- A **formula dependency graph**: when a cell changes, recalculate dependents in topological order (detect cycles).
+- Collaborative edits as cell-level operations ordered by the server (OT for text inside cells); recalculation can run on the server for large sheets and on the client for responsiveness.
+
+</details>
+
+### 18. Design a news aggregator (like Google News).
+
+<details>
+<summary>Answer</summary>
+
+- **Ingestion** – crawl publisher sites and RSS/Atom feeds on schedules based on how often each source updates; publishers can also push sitemaps.
+- **Processing** – extract article text, deduplicate (near-duplicate detection with SimHash/embeddings), and **cluster articles about the same story**; classify by topic, region and language; extract entities.
+- **Ranking** – per story: freshness, source authority, coverage breadth (how many outlets), and engagement; personalised for users by interests and history, with diversity of sources and viewpoints.
+- **Serving** – precompute top stories per category/region and cache them (CDN and Redis); personalise by re-ranking cached candidates at request time.
+- **Breaking news** – detect spikes in coverage and push notifications to interested users (rate-limited).
+- **Quality** – handle paywalls, spam sites and misinformation policies; respect robots.txt and publisher agreements.
+
+</details>
+
 ---
 
 [⬅ Previous: Designs – Core Infrastructure](16-designs-core-infrastructure.md) · [⬅ Back to index](../README.md) · [Next: Designs – Location, Commerce & Fintech ➡](18-designs-location-commerce.md)
