@@ -2,7 +2,7 @@
   "name": "System Design Interview Prep Tracker",
   "short_name": "System Design",
   "description": "Study system design interview questions and track your progress.",
-  "start_url": "/System-Design-Interview-Questions-cheat-sheet/",
+  "start_url": "/System-Design-Interview-Questions-and-Answers/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#f7f7f5",
@@ -25,5 +25,5 @@
       "purpose": "maskable"
     }
   ],
-  "id": "/System-Design-Interview-Questions-cheat-sheet/"
+  "id": "/System-Design-Interview-Questions-and-Answers/"
 }

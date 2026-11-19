@@ -1,14 +1,14 @@
-# System Design Interview Questions – Cheat Sheet
+# System Design Interview Questions & Answers
 
 A revision guide for system design interviews: **400 questions with interview-ready answers**, split into 23 topics. It covers the building blocks (caching, databases, sharding, consistency, messaging), 63 full FAANG-style design walkthroughs, mobile system design, low-level design, scenario-based "what would you do if…" questions, AI/LLM systems, and **company-wise questions** from Google, Meta, Amazon, Netflix, Uber, Stripe, Flipkart, Swiggy, PhonePe, Zerodha, Hotstar and more.
 
 Every answer is hidden in a collapsible block, so you can **test yourself first** and then click to check.
 
-> **📈 [Open the interactive study tracker](https://akshayashokcode.github.io/System-Design-Interview-Questions-cheat-sheet/)**: mark questions ✓ Done or ↻ Revise, see your progress per topic, search every question, listen to answers read aloud, and continue where you left off.
+> **📈 [Open the interactive study tracker](https://akshayashokcode.github.io/System-Design-Interview-Questions-and-Answers/)**: mark questions ✓ Done or ↻ Revise, see your progress per topic, search every question, listen to answers read aloud, and continue where you left off.
 >
 > **No account needed.** Your progress saves automatically on your device. Want to keep it safe and in sync across your devices? Sign in (optional).
 
-Also see the platform repos: **[Android Interview Questions](https://github.com/AkshayAshokCode/Android-Interview-Questions-cheat-sheet)** · **[iOS Interview Questions](https://github.com/AkshayAshokCode/iOS-Interview-Questions-cheat-sheet)**
+Also see the platform repos: **[Android Interview Questions](https://github.com/AkshayAshokCode/Android-Interview-Questions-and-Answers)** · **[iOS Interview Questions](https://github.com/AkshayAshokCode/iOS-Interview-Questions-and-Answers)**
 
 ---
 

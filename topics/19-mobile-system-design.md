@@ -4,7 +4,7 @@
 
 Covers: how the mobile round differs, the client architecture, API design for mobile, offline-first and sync, caching, pagination, real-time updates, push notifications, image loading, background work, performance and battery, releases and feature flags, plus worked designs (feed, chat, offline notes, image loader, downloader, analytics SDK). Platform notes compare Android and iOS.
 
-For platform-specific depth, see the [Android](https://github.com/AkshayAshokCode/Android-Interview-Questions-cheat-sheet) and [iOS](https://github.com/AkshayAshokCode/iOS-Interview-Questions-cheat-sheet) repos.
+For platform-specific depth, see the [Android](https://github.com/AkshayAshokCode/Android-Interview-Questions-and-Answers) and [iOS](https://github.com/AkshayAshokCode/iOS-Interview-Questions-and-Answers) repos.
 
 ---
 
