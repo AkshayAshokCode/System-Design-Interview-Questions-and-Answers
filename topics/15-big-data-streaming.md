@@ -375,7 +375,7 @@ The engine can't wait forever for stragglers, so it needs a signal of progress t
 ```mermaid
 sequenceDiagram
     participant S as Source
-    participant W as "Window 10:00-10:01"
+    participant W as Window 10:00-10:01
     participant O as Output
     S->>W: event t=10:00:20
     S->>W: event t=10:00:50

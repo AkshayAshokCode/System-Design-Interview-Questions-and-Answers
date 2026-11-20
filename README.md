@@ -1,8 +1,8 @@
 # System Design Interview Questions & Answers
 
-A revision guide for system design interviews: **400 questions with interview-ready answers**, split into 23 topics. It covers the building blocks (caching, databases, sharding, consistency, messaging), 63 full FAANG-style design walkthroughs, mobile system design, low-level design, scenario-based "what would you do if…" questions, AI/LLM systems, and **company-wise questions** from Google, Meta, Amazon, Netflix, Uber, Stripe, Flipkart, Swiggy, PhonePe, Zerodha, Hotstar and more.
+A revision guide for system design interviews: **400 questions with fully explained answers**, split into 23 topics. It covers the building blocks (caching, databases, sharding, consistency, messaging), 63 full FAANG-style design walkthroughs, mobile system design, low-level design, scenario-based "what would you do if…" questions, AI/LLM systems, and **company-wise questions** from Google, Meta, Amazon, Netflix, Uber, Stripe, Flipkart, Swiggy, PhonePe, Zerodha, Hotstar and more.
 
-Every answer is hidden in a collapsible block, so you can **test yourself first** and then click to check.
+Every answer opens with a short **In short:** line you can say in the interview, then explains the concept in depth: how it works, code, comparison tables, diagrams, common pitfalls and likely follow-up questions. Answers are hidden in collapsible blocks, so you can **test yourself first** and then click to check.
 
 > **📈 [Open the interactive study tracker](https://akshayashokcode.github.io/System-Design-Interview-Questions-and-Answers/)**: mark questions ✓ Done or ↻ Revise, see your progress per topic, search every question, listen to answers read aloud, and continue where you left off.
 >
